@@ -143,9 +143,9 @@
 		var internalMult = 1.0;
 		var displayWidth = display.offsetWidth;
 		var displayHeight = display.offsetHeight;
-		// Mobile-first: Use adaptive minimums based on screen size
-		var minWidth = Math.min(displayWidth, window.innerWidth < 768 ? displayWidth : 1024);
-		var minHeight = Math.min(displayHeight, window.innerWidth < 768 ? displayHeight : 768);
+		// Mobile-first: Dynamic minimums based on viewport percentage
+		var minWidth = Math.min(displayWidth, Math.max(displayWidth * 0.9, window.innerWidth * 0.95));
+		var minHeight = Math.min(displayHeight, Math.max(displayHeight * 0.9, window.innerHeight * 0.85));
 		if(displayWidth < minWidth)
 			internalMult = minWidth / displayWidth;
 		if(displayHeight < minHeight)
@@ -153,10 +153,11 @@
 		var internalWidth = Math.floor(displayWidth * internalMult);
 		var internalHeight = Math.floor(displayHeight * internalMult);
 		cx.setKmsCanvas(display, internalWidth, internalHeight);
-		// Compute the size to be used for AI screenshots
+		// Compute the size to be used for AI screenshots - mobile-first responsive
 		var screenshotMult = 1.0;
-		var maxWidth = 1024;
-		var maxHeight = 768;
+		// Dynamic maximums based on viewport and device capabilities
+		var maxWidth = Math.min(internalWidth, window.innerWidth <= 768 ? window.innerWidth * 0.95 : window.innerWidth * 0.8);
+		var maxHeight = Math.min(internalHeight, window.innerHeight <= 768 ? window.innerHeight * 0.8 : window.innerHeight * 0.75);
 		if(internalWidth > maxWidth)
 			screenshotMult = maxWidth / internalWidth;
 		if(internalHeight > maxHeight)
@@ -377,16 +378,16 @@
 
 <main class="relative w-full h-full">
 	<Nav />
-	<div class="absolute top-10 bottom-0 left-0 right-0">
+	<div class="absolute top-8 sm:top-10 lg:top-12 bottom-0 left-0 right-0">
 		<SideBar on:connect={handleConnect} on:reset={handleReset} handleTool={!configObj.needsDisplay || curVT == 7 ? handleTool : null} on:sidebarPinChange={handleSidebarPinChange}>
 			<slot></slot>
 		</SideBar>
 		{#if configObj.needsDisplay}
-			<div class="absolute top-0 bottom-0 left-0 md:left-14 {sideBarPinned ? 'md:left-80' : ''} right-0">
+			<div class="absolute top-0 bottom-0 left-0 sm:left-12 md:left-14 lg:left-16 {sideBarPinned ? 'sm:left-72 md:left-80 lg:left-96' : ''} right-0">
 				<canvas class="w-full h-full cursor-none" id="display"></canvas>
 			</div>
 		{/if}
-		<div class="absolute top-0 bottom-0 left-0 md:left-14 {sideBarPinned ? 'md:left-80' : ''} right-0 p-1 scrollbar" id="console">
+		<div class="absolute top-0 bottom-0 left-0 sm:left-12 md:left-14 lg:left-16 {sideBarPinned ? 'sm:left-72 md:left-80 lg:left-96' : ''} right-0 p-1 scrollbar" id="console">
 		</div>
 	</div>
 </main>
