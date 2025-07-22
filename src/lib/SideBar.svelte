@@ -67,7 +67,7 @@
 	export let handleTool;
 </script>
 
-<div class="flex flex-row w-14 h-full bg-neutral-700" >
+<div class="flex flex-row w-14 md:w-14 h-full bg-neutral-700" >
 	<div class="flex flex-col shrink-0 w-14 text-gray-300">
 		{#each icons as i}
 			{#if i}
@@ -84,7 +84,7 @@
 		{/each}
 	</div>
 	<div
-		class="relative flex flex-col gap-5 shrink-0 w-80 h-full z-10 p-2 bg-neutral-600 text-gray-100 opacity-95"
+		class="relative flex flex-col gap-5 shrink-0 w-[calc(100vw-3.5rem)] md:w-80 h-full z-10 p-2 bg-neutral-600 text-gray-100 opacity-95"
 		class:hidden={!activeInfo}
 		on:mouseenter={handleMouseEnterPanel}
 		on:mouseleave={hideInfo}

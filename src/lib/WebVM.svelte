@@ -143,8 +143,9 @@
 		var internalMult = 1.0;
 		var displayWidth = display.offsetWidth;
 		var displayHeight = display.offsetHeight;
-		var minWidth = 1024;
-		var minHeight = 768;
+		// Mobile-first: Use adaptive minimums based on screen size
+		var minWidth = Math.min(displayWidth, window.innerWidth < 768 ? displayWidth : 1024);
+		var minHeight = Math.min(displayHeight, window.innerWidth < 768 ? displayHeight : 768);
 		if(displayWidth < minWidth)
 			internalMult = minWidth / displayWidth;
 		if(displayHeight < minHeight)
@@ -367,11 +368,11 @@
 			<slot></slot>
 		</SideBar>
 		{#if configObj.needsDisplay}
-			<div class="absolute top-0 bottom-0 {sideBarPinned ? 'left-[23.5rem]' : 'left-14'} right-0">
+			<div class="absolute top-0 bottom-0 left-0 md:left-14 {sideBarPinned ? 'md:left-80' : ''} right-0">
 				<canvas class="w-full h-full cursor-none" id="display"></canvas>
 			</div>
 		{/if}
-		<div class="absolute top-0 bottom-0 {sideBarPinned ? 'left-[23.5rem]' : 'left-14'} right-0 p-1 scrollbar" id="console">
+		<div class="absolute top-0 bottom-0 left-0 md:left-14 {sideBarPinned ? 'md:left-80' : ''} right-0 p-1 scrollbar" id="console">
 		</div>
 	</div>
 </main>
