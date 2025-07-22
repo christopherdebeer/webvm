@@ -17,10 +17,10 @@ html
 	height: 100%;
 }
 
-/* Mobile-first responsive design */
+/* Mobile-first responsive design - Larger fonts for better readability */
 @media (max-width: 767px) {
 	html {
-		font-size: calc(100vw / 50);
+		font-size: calc(100vw / 35); /* Increased from /50 for larger mobile font */
 	}
 	
 	body {
@@ -30,12 +30,12 @@ html
 
 @media (min-width: 768px) and (max-width: 1023px) {
 	html {
-		font-size: calc(100vw / 60);
+		font-size: calc(100vw / 45); /* Increased from /60 for larger tablet font */
 	}
 }
 
 @media (min-width: 1024px) {
 	html {
-		font-size: 16px; /* Standard desktop size */
+		font-size: 18px; /* Increased from 16px for better desktop readability */
 	}
 }
