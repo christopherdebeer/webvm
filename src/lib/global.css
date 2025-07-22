@@ -12,6 +12,37 @@ body
 	background: black;
 }
 
+/* Mobile-first CSS custom properties for configurable dimensions */
+:root {
+	/* Navigation heights - mobile first */
+	--nav-height-mobile: 2rem;
+	--nav-height-tablet: 2.5rem; 
+	--nav-height-desktop: 3rem;
+	
+	/* Sidebar widths - mobile first */
+	--sidebar-icon-width-mobile: 3rem;
+	--sidebar-icon-width-tablet: 3.5rem;
+	--sidebar-icon-width-desktop: 4rem;
+	
+	--sidebar-panel-width-mobile: calc(100vw - var(--sidebar-icon-width-mobile));
+	--sidebar-panel-width-tablet: 18rem;
+	--sidebar-panel-width-desktop: 20rem;
+	--sidebar-panel-width-large: 24rem;
+	
+	/* Display constraints - mobile first */
+	--display-min-scale-mobile: 0.95;
+	--display-min-scale-tablet: 0.9;
+	--display-min-scale-desktop: 0.8;
+	
+	/* Screenshot maximums - mobile first */
+	--screenshot-max-width-mobile: 95vw;
+	--screenshot-max-height-mobile: 80vh;
+	--screenshot-max-width-tablet: 90vw;
+	--screenshot-max-height-tablet: 85vh;
+	--screenshot-max-width-desktop: 80vw;
+	--screenshot-max-height-desktop: 75vh;
+}
+
 html
 {
 	height: 100%;
