@@ -181,6 +181,20 @@
 	{
 		term.options.fontSize = computeXTermFontSize();
 		fitAddon.fit();
+		
+		// Constrain terminal width on mobile devices for better readability
+		if (window.innerWidth <= 767) {
+			// Mobile: limit to 60 characters max
+			if (term.cols > 60) {
+				term.resize(60, term.rows);
+			}
+		} else if (window.innerWidth <= 1023) {
+			// Tablet: limit to 80 characters max  
+			if (term.cols > 80) {
+				term.resize(80, term.rows);
+			}
+		}
+		
 		const display = document.getElementById("display");
 		if(display)
 			setScreenSize(display);
